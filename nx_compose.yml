@@ -38,7 +38,7 @@ services:
       - redis
       networks:
         crowdsec_test:
-          ipv4_address: 172.20.0.3
+          ipv4_address: 172.20.0.2
 
   web:
     build: ./web
@@ -82,6 +82,8 @@ services:
       - logs:/var/log/nginx
     networks:
       - proxy-tier
+      crowdsec_test:
+        ipv4_address: 172.20.0.3
 
   letsencrypt-companion:
     image: nginxproxy/acme-companion
@@ -95,7 +97,7 @@ services:
     networks:
       - proxy-tier
       crowdsec_test:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 172.20.0.4
     depends_on:
       - proxy
   
@@ -116,7 +118,7 @@ services:
       - crowdsec-config:/etc/crowdsec/
     networks:
       crowdsec_test:
-        ipv4_address: 172.20.0.4
+        ipv4_address: 172.20.0.5
 
 volumes:
   db:
